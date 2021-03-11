@@ -15,3 +15,4 @@ Tutorial about how to get started with Angular and Firebase to build a Kanban bo
   - `ng add @angular/material`
 - Add Angular Fire
   - `ng add @angular/fire`
+- Deploy to firebase hosting
