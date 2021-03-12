@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { AddProjectComponent } from '../add-project/add-project.component';
 
 export interface IProject {
@@ -25,7 +26,8 @@ export class ViewProjectsComponent {
 
   constructor(
     private afs: AngularFirestore,
-    public dialog: MatDialog,
+    private authService: AuthService,
+    private dialog: MatDialog,
     private router: Router
   ) {
     // Projects collection reference
@@ -56,10 +58,13 @@ export class ViewProjectsComponent {
       name: project,
       created: firebase.firestore.FieldValue.serverTimestamp(),
       updated: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedBy: JSON.parse(localStorage.getItem('user') || '').uid
+      updatedBy: this.authService.getUser().uid
     })
       .then(docRef => {
-        console.log(docRef);
+        this.projectsCol.doc(docRef.id).collection('users').doc(this.authService.getUser().uid).set({
+          role: 'owner'
+        });
+        this.router.navigate([`/projects/${project}/${docRef.id}`]);
       })
       .catch((error) => console.error('Error adding document: ', error));
   }

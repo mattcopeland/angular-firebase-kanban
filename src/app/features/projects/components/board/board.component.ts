@@ -141,11 +141,11 @@ export class BoardComponent {
   }
 
   /**
-   * Check if a user is an admin of this project
+   * Check if a user is the owner of this project
    * @param userId user id of user to check
    */
-  isBoardAdmin(userId: string): boolean {
-    return !!this.users.find(user => user.userId === userId && user.role === 'admin');
+  isProjectOwner(userId: string): boolean {
+    return !!this.users.find(user => user.userId === userId && user.role === 'owner');
   }
 
   /**
