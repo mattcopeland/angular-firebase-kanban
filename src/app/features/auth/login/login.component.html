@@ -1,0 +1,15 @@
+<div *ngIf="authService.user$ | async as user; else login"
+     class="logged-in">
+  <img [src]="user.photoURL"
+       [alt]="user.displayName"
+       referrerpolicy="no-referrer">
+  <button mat-flat-button
+          color="primary"
+          (click)="authService.signOut()">Log out</button>
+</div>
+
+<ng-template #login>
+  <button mat-flat-button
+          color="primary"
+          (click)="authService.googleSignin()">Login</button>
+</ng-template>

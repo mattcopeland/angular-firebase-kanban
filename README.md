@@ -16,3 +16,20 @@ Tutorial about how to get started with Angular and Firebase to build a Kanban bo
 - Add Angular Fire
   - `ng add @angular/fire`
 - Deploy to firebase hosting
+
+## Step 2 - Authentication
+
+- Setup Firebase config and AngularFire module
+- Add AngularFirestore and AngularFireAuth modules
+- Create a shared Material module
+  - `ng g m shared/material`
+  - Include the `MatButtonModule`
+- Create a Authentication module under features
+  - `ng g m features/auth --routing`
+- Create a login component under the Auth feature
+  - `ng g c features/auth/login`
+- Make the login component the default route for the app
+- Create an Auth Service
+  - `ng g s features/auth/services/auth`
+  - Add sign-in and sign out functionality
+  - Store the user object for use
