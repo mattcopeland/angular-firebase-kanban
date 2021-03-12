@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -9,6 +10,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [],
   imports: [
+    DragDropModule,
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
@@ -17,6 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule
   ],
   exports: [
+    DragDropModule,
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,

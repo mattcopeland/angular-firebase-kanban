@@ -1,0 +1,85 @@
+<div class="board">
+  <div class="header">
+    <div>
+      <h1>{{projectName | titlecase}}</h1>
+      <div class="breadcrumb">
+        <a [routerLink]="['/kanban/projects']">Projects</a>
+        >
+        <span>{{projectName}}</span>
+      </div>
+    </div>
+    <div class="example-button-container">
+      <button mat-mini-fab
+              color="primary"
+              (click)="openAddTaskDialog()"
+              aria-label="Add a task">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="boards-container">
+
+    <div cdkDropList
+         #todoList="cdkDropList"
+         id="todo"
+         [cdkDropListData]="todo || []"
+         [cdkDropListConnectedTo]="[doingList, doneList]"
+         class="boards-container__board"
+         (cdkDropListDropped)="moveTask($event)">
+      <h2>To do</h2>
+      <div class="boards-container__board__card"
+           [ngClass]="{'owned': item.userId === user.uid || isBoardAdmin(user.uid) }"
+           *ngFor="let item of todo"
+           cdkDrag>
+        <div class="placeholder"
+             *cdkDragPlaceholder></div>
+        <div>{{item.name}}</div>
+        <img [src]="item.userPhoto"
+             [alt]="item.userName"
+             referrerpolicy="no-referrer">
+      </div>
+    </div>
+
+    <div cdkDropList
+         #doingList="cdkDropList"
+         id="doing"
+         [cdkDropListData]="doing || []"
+         [cdkDropListConnectedTo]="[todoList, doneList]"
+         class="boards-container__board"
+         (cdkDropListDropped)="moveTask($event)">
+      <h2>Doing</h2>
+      <div class="boards-container__board__card"
+           [ngClass]="{'owned': item.userId === user.uid || isBoardAdmin(user.uid) }"
+           *ngFor="let item of doing"
+           cdkDrag>
+        <div class="placeholder"
+             *cdkDragPlaceholder></div>
+        <div>{{item.name}}</div>
+        <img [src]="item.userPhoto"
+             [alt]="item.userName">
+      </div>
+    </div>
+
+    <div cdkDropList
+         id="done"
+         #doneList="cdkDropList"
+         [cdkDropListData]="done || []"
+         [cdkDropListConnectedTo]="[todoList, doingList]"
+         class="boards-container__board"
+         (cdkDropListDropped)="moveTask($event)">
+      <h2>Done</h2>
+      <div class="boards-container__board__card"
+           [ngClass]="{'owned': item.userId === user.uid || isBoardAdmin(user.uid) }"
+           *ngFor="let item of done"
+           cdkDrag>
+        <div class="placeholder"
+             *cdkDragPlaceholder></div>
+        <div>{{item.name}}</div>
+        <img [src]="item.userPhoto"
+             [alt]="item.userName">
+      </div>
+    </div>
+
+  </div>
+</div>

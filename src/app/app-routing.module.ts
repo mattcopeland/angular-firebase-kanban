@@ -9,13 +9,14 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () =>
       import('./features/auth/auth.module').then((m) => m.AuthModule),
+    data: { animation: 'isRight' }
   },
   {
     path: 'projects',
     loadChildren: () =>
       import('./features/projects/projects.module').then((m) => m.ProjectsModule),
     canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin }
+    data: { authGuardPipe: redirectUnauthorizedToLogin, animation: 'isLeft' },
   },
   {
     path: '**',

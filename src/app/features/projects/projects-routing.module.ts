@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BoardComponent } from './components/board/board.component';
 import { ViewProjectsComponent } from './components/view-projects/view-projects.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ViewProjectsComponent,
+    component: ViewProjectsComponent
+  },
+  {
+    path: ':projectname/:projectid',
+    component: BoardComponent,
+    data: { animation: 'isRight' }
   },
   {
     path: '**',

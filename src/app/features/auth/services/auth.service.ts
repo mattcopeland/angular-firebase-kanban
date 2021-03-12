@@ -7,14 +7,12 @@ import 'firebase/auth';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-
 export interface IUser {
   uid: string;
-  email?: string | null;
-  photoURL?: string;
-  displayName?: string;
+  email: string | null;
+  photoURL: string;
+  displayName: string;
   firstName?: string;
-  role?: string;
 }
 
 @Injectable({
