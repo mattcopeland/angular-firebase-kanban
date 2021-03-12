@@ -1,0 +1,18 @@
+<div class="projects">
+  <div class="header">
+    <h1>Projects</h1>
+    <button mat-mini-fab
+            color="primary"
+            (click)="openAddProjectDialog()"
+            aria-label="Add a project">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf="projects$ | async as projects">
+    <ul *ngFor="let project of projects">
+      <li><a [routerLink]="[project.name+'/'+project.id]">{{project.name}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

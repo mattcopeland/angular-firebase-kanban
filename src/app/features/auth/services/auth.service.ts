@@ -44,7 +44,7 @@ export class AuthService {
   async googleSignin(): Promise<void> {
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
-    this.router.navigate(['kanban/projects']);
+    this.router.navigate(['projects']);
     return this.updateUserData(credential.user as IUser);
   }
 
