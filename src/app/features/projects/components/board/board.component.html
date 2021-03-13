@@ -23,13 +23,14 @@
     <div cdkDropList
          #todoList="cdkDropList"
          id="todo"
-         [cdkDropListData]="todo || []"
+         [cdkDropListData]="todo"
          [cdkDropListConnectedTo]="[doingList, doneList]"
          class="boards-container__board"
          (cdkDropListDropped)="moveTask($event)">
       <h2>To do</h2>
       <div class="boards-container__board__card"
-           [ngClass]="{'owned': item.userId === user.uid || isProjectOwner(user.uid) }"
+           [ngClass]="{'draggable': item.userId === user.uid || isProjectOwner(user.uid) }"
+           [cdkDragDisabled]="item.userId !== user.uid && !isProjectOwner(user.uid)"
            *ngFor="let item of todo"
            cdkDrag>
         <div class="placeholder"
@@ -44,13 +45,14 @@
     <div cdkDropList
          #doingList="cdkDropList"
          id="doing"
-         [cdkDropListData]="doing || []"
+         [cdkDropListData]="doing"
          [cdkDropListConnectedTo]="[todoList, doneList]"
          class="boards-container__board"
          (cdkDropListDropped)="moveTask($event)">
       <h2>Doing</h2>
       <div class="boards-container__board__card"
-           [ngClass]="{'owned': item.userId === user.uid || isProjectOwner(user.uid) }"
+           [ngClass]="{'draggable': item.userId === user.uid || isProjectOwner(user.uid) }"
+           [cdkDragDisabled]="item.userId !== user.uid && !isProjectOwner(user.uid)"
            *ngFor="let item of doing"
            cdkDrag>
         <div class="placeholder"
@@ -64,13 +66,14 @@
     <div cdkDropList
          id="done"
          #doneList="cdkDropList"
-         [cdkDropListData]="done || []"
+         [cdkDropListData]="done"
          [cdkDropListConnectedTo]="[todoList, doingList]"
          class="boards-container__board"
          (cdkDropListDropped)="moveTask($event)">
       <h2>Done</h2>
       <div class="boards-container__board__card"
-           [ngClass]="{'owned': item.userId === user.uid || isProjectOwner(user.uid) }"
+           [ngClass]="{'draggable': item.userId === user.uid || isProjectOwner(user.uid) }"
+           [cdkDragDisabled]="item.userId !== user.uid && !isProjectOwner(user.uid)"
            *ngFor="let item of done"
            cdkDrag>
         <div class="placeholder"
